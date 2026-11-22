@@ -1,5 +1,8 @@
 # Homework: React Ecosystem & Jamstack Architecture
 
+[![Jira Project](https://img.shields.io/badge/Jira-HWM%20Sprint%201-0052CC?logo=jira)](https://sistemas-uce.atlassian.net/jira/software/projects/HWM/boards)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-RodARWx%2Fhomework--react--jamstack-181717?logo=github)](https://github.com/RodARWx/homework-react-jamstack)
+
 **Course**: Web Programming (Programación Web)  
 **Institution**: Universidad Central del Ecuador (UCE)  
 **Jira Board**: [Homework - WP - Monday (HWM)](https://sistemas-uce.atlassian.net/jira/software/projects/HWM/boards)
