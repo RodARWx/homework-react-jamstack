@@ -5,11 +5,11 @@ import { useStore } from '../store/useStore'
 
 /**
  * NAVBAR COMPONENT
- * Utiliza <NavLink> de 'react-router-dom'.
- * A diferencia de <a> tradicional (que recarga toda la página desde el servidor),
- * <NavLink> intercepta el evento de clic y actualiza la URL en el navegador
- * mediante la History API, permitiendo una experiencia SPA (Single Page Application).
- * Además, la función isActive nos permite aplicar estilos automáticamente a la ruta activa.
+ * Uses <NavLink> from 'react-router-dom'.
+ * Unlike a traditional <a> tag (which triggers a full page reload from the web server),
+ * <NavLink> intercepts click events and updates the browser URL via the HTML5 History API,
+ * delivering an instantaneous Single Page Application (SPA) experience.
+ * Furthermore, the isActive callback function automatically applies active styles to the current route.
  */
 export default function Navbar() {
   const counter = useStore((state) => state.counter)
@@ -77,7 +77,7 @@ export default function Navbar() {
                   background: 'rgba(168, 85, 247, 0.2)',
                   color: '#c084fc',
                 }}
-                title="Contador global desde Zustand (useStore)"
+                title="Global counter from Zustand (useStore)"
               >
                 {counter}
               </span>
