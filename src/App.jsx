@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import HomeJamstack from './pages/HomeJamstack'
 import RouterDemo from './pages/RouterDemo'
 import FormDemo from './pages/FormDemo'
+import AxiosDemo from './pages/AxiosDemo'
 
 /**
  * APP ROOT COMPONENT
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/" element={<HomeJamstack />} />
           <Route path="/router" element={<RouterDemo />} />
           <Route path="/form" element={<FormDemo />} />
+          <Route path="/axios" element={<AxiosDemo />} />
           {/* Ruta comodín de respaldo */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
