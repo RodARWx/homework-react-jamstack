@@ -2,30 +2,30 @@ import { create } from 'zustand'
 
 /**
  * ============================================================================
- * ZUSTAND GLOBAL STORE (Gestión de Estado Global)
+ * ZUSTAND GLOBAL STORE (Global State Management)
  * ============================================================================
- * ¿Por qué Zustand?
- * 1. ZERO BOILERPLATE: No requiere actions, reducers, types complejos ni configuración extensa.
- * 2. NO PROVIDER HELL: A diferencia de React Context API o Redux, no necesitas envolver
- *    tu árbol de componentes con <Provider store={...}>.
- * 3. SELECTOR PATTERN: Permite suscribir componentes solo a la porción exacta de estado
- *    que necesitan (ej: (state) => state.counter). Si otra parte cambia, este componente
- *    NO se re-renderiza innecesariamente.
+ * Why Zustand?
+ * 1. ZERO BOILERPLATE: Does not require actions, reducers, complex types, or verbose setup.
+ * 2. NO PROVIDER HELL: Unlike React Context API or Redux, you don't need to wrap
+ *    your component tree in <Provider store={...}>.
+ * 3. SELECTOR PATTERN: Allows components to subscribe strictly to the exact slice
+ *    of state they need (e.g. (state) => state.counter). If other slices mutate,
+ *    this component does NOT re-render unnecessarily.
  * ============================================================================
  */
 
 export const useStore = create((set) => ({
-  // --- 1. Estado de Contador ---
+  // --- 1. Counter State ---
   counter: 0,
   increment: () => set((state) => ({ counter: state.counter + 1 })),
   decrement: () => set((state) => ({ counter: Math.max(0, state.counter - 1) })),
   resetCounter: () => set({ counter: 0 }),
 
-  // --- 2. Estado de Lista de Tareas / Notas ---
+  // --- 2. Tasks / Notes State ---
   tasks: [
-    { id: 1, text: 'Comprender la arquitectura Jamstack', completed: true },
-    { id: 2, text: 'Explicar por qué React Hook Form no re-renderiza con ref', completed: false },
-    { id: 3, text: 'Demostrar manejo de errores con Axios vs fetch', completed: false }
+    { id: 1, text: 'Understand Jamstack architecture principles', completed: true },
+    { id: 2, text: 'Explain why React Hook Form avoids re-renders via ref', completed: false },
+    { id: 3, text: 'Demonstrate Axios error handling vs native fetch', completed: false }
   ],
 
   addTask: (text) => set((state) => ({

@@ -9,9 +9,9 @@ import ZustandDemo from './pages/ZustandDemo'
 
 /**
  * APP ROOT COMPONENT
- * Configura la estructura principal y la tabla de enrutamiento con <Routes> y <Route>.
- * Cada ruta asocia una URL a un componente específico:
- * - "/" -> HomeJamstack (Arquitectura Jamstack)
+ * Configures the main application layout and routing table with <Routes> and <Route>.
+ * Each route maps a URL pathname to a specific page component:
+ * - "/" -> HomeJamstack (Jamstack Architecture)
  * - "/router" -> RouterDemo (React Router)
  * - "/form" -> FormDemo (React Hook Form)
  * - "/axios" -> AxiosDemo (Axios HTTP Client)
@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/form" element={<FormDemo />} />
           <Route path="/axios" element={<AxiosDemo />} />
           <Route path="/zustand" element={<ZustandDemo />} />
-          {/* Ruta comodín de respaldo */}
+          {/* Fallback wildcard route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

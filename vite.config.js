@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Configuración de Vite con soporte para JSX y React Fast Refresh
+// Vite configuration with JSX and React Fast Refresh support
 export default defineConfig({
   plugins: [react()],
   server: {

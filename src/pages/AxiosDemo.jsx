@@ -8,18 +8,18 @@ export default function AxiosDemo() {
   const [error, setError] = useState(null)
   const [statusCode, setStatusCode] = useState(null)
 
-  // Función para obtener usuarios legítimos de una API pública
+  // Fetch users from public REST API
   const fetchUsers = async () => {
     setLoading(true)
     setError(null)
     setStatusCode(null)
     try {
-      // Axios parsea automáticamente la respuesta a JSON (no requiere res.json())
+      // Axios automatically transforms JSON response body (no res.json() step needed)
       const response = await api.get('/users?_limit=4')
       setUsers(response.data)
-      setStatusCode(response.status) // Ej: 200 OK
+      setStatusCode(response.status) // e.g. 200 OK
     } catch (err) {
-      // Axios atrapa automáticamente códigos 4xx y 5xx en el bloque catch
+      // Axios automatically rejects promises on 4xx/5xx status codes into catch block
       setError(err.message)
       if (err.response) {
         setStatusCode(err.response.status)
@@ -29,17 +29,17 @@ export default function AxiosDemo() {
     }
   }
 
-  // Función para forzar un error HTTP 404 y demostrar el manejo de errores de Axios
+  // Simulate HTTP 404 error to demonstrate Axios error handling
   const trigger404Error = async () => {
     setLoading(true)
     setError(null)
     setStatusCode(null)
     try {
-      // Endpoint inexistente
-      await api.get('/recurso-inexistente-404')
+      // Non-existent endpoint
+      await api.get('/non-existent-endpoint-404')
     } catch (err) {
-      // Axios rechaza la promesa ante cualquier código fuera del rango 2xx
-      setError(`Error capturado por Axios: ${err.message}`)
+      // Axios rejects the promise on any status code outside 2xx range
+      setError(`Error caught by Axios: ${err.message}`)
       if (err.response) {
         setStatusCode(err.response.status) // 404
       }
@@ -48,7 +48,7 @@ export default function AxiosDemo() {
     }
   }
 
-  // Carga inicial al montar el componente
+  // Initial data fetch on component mount
   useEffect(() => {
     fetchUsers()
   }, [])
@@ -61,7 +61,7 @@ export default function AxiosDemo() {
         </span>
         <h1 className="page-title">Axios HTTP Client</h1>
         <p className="page-description">
-          Cliente HTTP basado en <strong>Promesas</strong> para el navegador y Node.js. Facilita peticiones asíncronas con transformación automática de JSON y captura estricta de errores.
+          Promise-based HTTP client for browser and Node.js. Simplifies asynchronous requests with automatic JSON data parsing and strict status error handling.
         </p>
       </div>
 
@@ -69,10 +69,10 @@ export default function AxiosDemo() {
         {/* Controls Card */}
         <div className="card">
           <h2 className="card-title">
-            <RefreshCw size={20} color="#38bdf8" /> Acciones de Petición
+            <RefreshCw size={20} color="#38bdf8" /> Request Operations
           </h2>
           <p style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '1.25rem' }}>
-            Prueba cómo reacciona Axios ante una respuesta exitosa (200 OK) vs un error del servidor (404 Not Found):
+            Inspect how Axios responds to successful HTTP responses (200 OK) versus server errors (404 Not Found):
           </p>
 
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -81,7 +81,7 @@ export default function AxiosDemo() {
               disabled={loading} 
               className="btn btn-primary"
             >
-              <CheckCircle size={16} /> Obtener Usuarios (200 OK)
+              <CheckCircle size={16} /> Fetch Users (200 OK)
             </button>
 
             <button 
@@ -89,14 +89,14 @@ export default function AxiosDemo() {
               disabled={loading} 
               className="btn btn-danger"
             >
-              <AlertTriangle size={16} /> Simular Error 404
+              <AlertTriangle size={16} /> Simulate 404 Error
             </button>
           </div>
 
           {/* Status Display */}
           <div style={{ marginTop: '1.5rem', background: '#0b1120', padding: '1rem', borderRadius: '8px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Código de Estado HTTP:</span>
+              <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>HTTP Status Code:</span>
               {statusCode && (
                 <span style={{
                   padding: '0.2rem 0.5rem',
@@ -113,7 +113,7 @@ export default function AxiosDemo() {
             
             {loading && (
               <div style={{ color: '#38bdf8', fontSize: '0.85rem', marginTop: '0.5rem' }}>
-                ⏳ Cargando petición asíncrona...
+                ⏳ Loading asynchronous request...
               </div>
             )}
 
@@ -125,21 +125,21 @@ export default function AxiosDemo() {
           </div>
 
           <div className="code-box">
-            // Instancia configurada en src/services/api.js:<br />
+            // Configured client instance in src/services/api.js:<br />
             const res = await api.get('/users?_limit=4');<br />
-            setUsers(res.data); // data ya está parseado como objeto JSON
+            setUsers(res.data); // data is already parsed as a native JavaScript object
           </div>
         </div>
 
         {/* Live Data Display Card */}
         <div className="card">
           <h2 className="card-title">
-            <Globe size={20} color="#22c55e" /> Datos de la API (JSONPlaceholder)
+            <Globe size={20} color="#22c55e" /> API Response (JSONPlaceholder)
           </h2>
 
           {loading ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8' }}>
-              Descargando datos desde la API...
+              Fetching data from remote API...
             </div>
           ) : users.length > 0 && !error ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -168,7 +168,7 @@ export default function AxiosDemo() {
             </div>
           ) : (
             <div style={{ padding: '1.5rem', textAlign: 'center', color: '#64748b' }}>
-              No hay datos para mostrar debido al error simulado. Haz clic en "Obtener Usuarios" para reintentar.
+              No data to display due to simulated error. Click "Fetch Users" to retry.
             </div>
           )}
         </div>
@@ -178,18 +178,17 @@ export default function AxiosDemo() {
       <div className="card" style={{ marginTop: '1.5rem' }}>
         <div className="defense-box" style={{ marginTop: 0 }}>
           <div className="defense-box-title">
-            <BookOpen size={18} /> Pregunta de Defensa: "¿Cuál es la diferencia fundamental entre Axios y la función nativa fetch()?"
+            <BookOpen size={18} /> Defense Question: "What is the fundamental difference between Axios and native fetch()?"
           </div>
           <p>
-            <strong>Respuesta clave:</strong> Hay dos diferencias cruciales:
+            <strong>Key Defense Answer:</strong> There are two critical differences:
             <br />
-            1. <strong>Manejo de Errores:</strong> Con <code>fetch()</code>, si el servidor devuelve un error 404 o 500, la promesa NO se rechaza; se considera exitosa y requiere que revises manualmente <code>if (!response.ok)</code>. En cambio, <strong>Axios rechaza automáticamente la promesa</strong> ante cualquier status que no esté en el rango 2xx, enviando el flujo directo al bloque <code>catch</code>.
+            1. <strong>Error Handling:</strong> With <code>fetch()</code>, when the server responds with a 404 Not Found or 500 Internal Server Error, the promise does NOT reject; it resolves normally and requires manual verification with <code>if (!response.ok)</code>. In contrast, <strong>Axios automatically rejects the promise</strong> on any status code outside the 2xx range, routing execution directly into the <code>catch</code> block.
             <br />
-            2. <strong>Transformación de Datos:</strong> Con <code>fetch()</code> tienes que hacer dos pasos asíncronos (<code>await fetch()</code> y luego <code>await res.json()</code>). Axios parsea el cuerpo de la respuesta a JSON en segundo plano y te lo entrega directamente en <code>response.data</code>.
+            2. <strong>Data Transformation:</strong> With <code>fetch()</code>, a two-step async sequence is required (<code>await fetch()</code> followed by <code>await res.json()</code>). Axios automatically parses the response body into JSON behind the scenes and exposes it directly via <code>response.data</code>.
           </p>
         </div>
       </div>
     </div>
   )
 }
-

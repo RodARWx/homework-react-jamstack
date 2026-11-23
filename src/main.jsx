@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
 
-// Montamos la aplicación React dentro del elemento #root del DOM
-// Envolvemos con <BrowserRouter> para habilitar el enrutamiento del lado del cliente (React Router)
+// Mount the React application into the #root DOM element
+// Wrap with <BrowserRouter> to enable client-side routing (React Router)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
