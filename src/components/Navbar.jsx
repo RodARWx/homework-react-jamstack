@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Layers, Compass, CheckSquare, Globe, Cpu } from 'lucide-react'
+import { useStore } from '../store/useStore'
 
 /**
  * NAVBAR COMPONENT
@@ -11,6 +12,8 @@ import { Layers, Compass, CheckSquare, Globe, Cpu } from 'lucide-react'
  * Además, la función isActive nos permite aplicar estilos automáticamente a la ruta activa.
  */
 export default function Navbar() {
+  const counter = useStore((state) => state.counter)
+
   return (
     <nav className="navbar">
       <div className="nav-wrapper">
@@ -64,6 +67,20 @@ export default function Navbar() {
             >
               <Cpu size={16} />
               Zustand
+              <span
+                style={{
+                  marginLeft: '0.25rem',
+                  padding: '0.05rem 0.45rem',
+                  borderRadius: '999px',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  background: 'rgba(168, 85, 247, 0.2)',
+                  color: '#c084fc',
+                }}
+                title="Contador global desde Zustand (useStore)"
+              >
+                {counter}
+              </span>
             </NavLink>
           </li>
         </ul>
